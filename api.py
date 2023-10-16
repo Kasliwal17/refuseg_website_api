@@ -4,6 +4,14 @@ from fastapi.middleware.cors import CORSMiddleware
 import torch
 from model import Unet
 from processing import pre_process_brats, post_process_brats
+import gdown
+
+def download_weights():
+    url = 'https://drive.google.com/file/d/1Bm57B2jzs4RikRoWzGXlLtvIt_5bJuG3/view?usp=sharing'
+    output = 'refuseg_beta_1.pth'
+    gdown.download(url, output, quiet=False)
+
+download_weights()
 
 model =Unet(
         encoder_name='resnet34',
@@ -14,7 +22,7 @@ model =Unet(
         in_channels=1,
         contrastive=False
     )
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+device = torch.device('cpu')
 state_dict = torch.load('./refuseg_beta_1.pth',map_location='cpu')
 state_dict = {k.replace('_orig_mod.', ''): v for k, v in state_dict.items()}
 model.load_state_dict(state_dict, strict=False)
