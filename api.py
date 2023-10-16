@@ -15,7 +15,7 @@ model =Unet(
         contrastive=False
     )
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-state_dict = torch.load('/content/drive/MyDrive/refuseg_beta_1.pth',map_location='cpu')
+state_dict = torch.load('./refuseg_beta_1.pth',map_location='cpu')
 state_dict = {k.replace('_orig_mod.', ''): v for k, v in state_dict.items()}
 model.load_state_dict(state_dict, strict=False)
 model.to(device)
