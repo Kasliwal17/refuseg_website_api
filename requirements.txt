@@ -1,9 +1,11 @@
 fastapi
 starlette
 pydantic
-torch
 Pillow
 albumentations
 segmentation-models-pytorch
 opencv-python
 gdown
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch
+torchvision
